@@ -1,0 +1,24 @@
+inherit ocaml
+
+NAME="ocaml-ocamlbuild"
+VERSION=0.10.1
+RELEASE=1
+CATEGORY="Devel"
+SUMMARY="OCaml build tool"
+DESCRIPTION="OCamlbuild is a generic build tool, that has built-in rules for
+building OCaml library and programs."
+HOMEPAGE="https://github.com/ocaml/ocamlbuild"
+SRC_URI="${HOMEPAGE}/archive/${VERSION}/ocamlbuild-${VERSION}.tar.gz"
+SRC_DIR="ocamlbuild-${VERSION}"
+
+src_compile() {
+	lndirs
+	cd ${B}
+	cygmake configure OCAMLBUILD_BINDIR=/usr/bin
+	cygmake
+}
+
+src_install() {
+	cd ${B}
+	cyginstall CHECK_IF_PREINSTALLED=false
+}
